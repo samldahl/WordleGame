@@ -10,32 +10,35 @@ const guessbox = document.querySelectorAll('.guessbox');
  let guesses = [];
  let timer = 60;
  let clicks = 0;
- let currentRow = 1
+ let currentRow = 1;
 
 
  /*----------------------------- Event Listeners -----------------------------*/
  keys.forEach((key, index) => {
    key.addEventListener('click', () => {
-     if (guess.length < wordLength) {
+     if (guess.length <= wordLength) {
        guess.push(key.textContent);
-       clicks = clicks + 1;
-       console.log(clicks);
        console.log(guess);
        updateGuessbox();
-       handleGuessSubmission();
        provideFeedback();
-       
-       // updating guess box & could be its own function
-      }
+       handleGuessSubmission();
+       console.log(`feedback`);
+             }
     })
   });
   /*-------------------------------- Functions --------------------------------*/
   function updateGuessbox() {
+  const rowStart = getRowStart();
   guess.forEach((letter, index) => {
-    guessbox[index].textContent = letter;
-    console.log('test');
-   })
-  };
+    guessbox[rowStart + index].textContent = letter;
+    console.log('letter added to guess');
+  });
+}
+
+function getRowStart() {
+  return (currentRow - 1) * wordLength;
+  // this grabs the row on guess, ie row 2 * 5 = 10
+}
 
 
   function handleGuessSubmission() {
@@ -48,41 +51,27 @@ const guessbox = document.querySelectorAll('.guessbox');
         // Move to the next row
         guesses.push(guess);
         guess = [];
-        currentRow++;
+        currentRow++; 
     }
 }
 
 function provideFeedback() {
+    const rowStart = getRowStart();
     guess.forEach((letter, index) => {
         if (letter === word[index]) {
-            guessbox[index].style.backgroundColor = 'green';
+            guessbox[rowStart + index].style.backgroundColor = 'green';
         } else if (word.includes(letter)) {
-            guessbox[index].style.backgroundColor = 'yellow';
+            guessbox[rowStart + index].style.backgroundColor = 'yellow';
         } else {
-            guessbox[index].style.backgroundColor = 'gray';
+            guessbox[rowStart + index].style.backgroundColor = 'gray';
         }
     });
 }
 
-// button_element.forEach((button, index) => {
-//     button.addEventListener('click', () => {
-//         if (board[index] !== null) {
-//             console.log('go somewhere else');
-//             return;
-//         } else
-//         board[index] = turn;
-//         //another ternary operation
-//         button.textContent = turn === 1 ? 'X' : '0';
-//         turn *= -1;
-//         gameCheck();
-//         winnerCheck();
-
-//     })
-//     });
-/*-------------------------------- Chug --------------------------------*/
- // draw check (only if no winner)
-// Noting for Oct 27th I spent 45 minutes trying to figure out why my keys weren't appearing turns out I just didn't have the word defer when my JS at the top of the page and things weren't loading in time.
-
-// Edge cases are going to be intense
-// double letters in words....
-// 
+function updateRow() {
+    for (let i = 0; i < wordLength; i++) {
+        const boxIndex = (currentRow - 1) * wordLength + i;
+        guessbox[boxIndex].textContent = guess[i] //
+        //Trying to get the row to change
+    }
+}
