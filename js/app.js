@@ -1,9 +1,12 @@
 /*-------------------------------- Constants --------------------------------*/
 // const word = wordList[Math.floor(Math.random() * wordList.length)];
-const word = 'bread;'
+const word = 'bread'
 const keys = document.querySelectorAll('.keys');
 const wordLength = 5;
 const guessbox = document.querySelectorAll('.guessbox');
+const enter = document.querySelector('.enter')
+const resetButton = document.getElementById('resetButton');
+const timerEl = document.getElementById('timer');
 
 /*---------------------------- Variables (state) ----------------------------*/
  let board = ['','','','','','','','','','','','','','','','','','','','','','','','','',];
@@ -17,17 +20,25 @@ const guessbox = document.querySelectorAll('.guessbox');
  /*----------------------------- Event Listeners -----------------------------*/
  keys.forEach((key, index) => {
    key.addEventListener('click', () => {
+    const letter = key.textContent;
+    const rowStart = getRowStart();
+    
      if (guess.length <= wordLength) {
        guess.push(key.textContent);
        console.log(guess);
        updateGuessbox();
-       provideFeedback();
-       handleGuessSubmission();
-       console.log(`feedback`);
-       console.log(word);
-             }
+      }
     })
   });
+  
+  enter.addEventListener('click', () => {
+    provideFeedback();
+    handleGuessSubmission();
+    console.log(`feedback`);
+    console.log(word);
+
+  })
+
   /*-------------------------------- Functions --------------------------------*/
   function updateGuessbox() {
   const rowStart = getRowStart();
@@ -46,7 +57,8 @@ function getRowStart() {
   function handleGuessSubmission() {
     if (guess.length === wordLength) { // 5
         if (guess.join('') === word) { // combos the array to word
-            console.log('Correct guess!'); 
+            console.log('Correct guess!');
+            showConfetti(); 
         } else {
             console.log('Incorrect guess!');
         }
@@ -57,17 +69,63 @@ function getRowStart() {
     }
 }
 
+function showConfetti() {
+    const confetti = document.getElementById('confetti-container');
+    if (confetti) {
+        confetti.style.display = 'flex';
+    }}
+document.addEventListener('DOMContentLoaded', function() {
+    if (resetButton) {
+        resetButton.addEventListener('click', function() {
+            window.location.reload();
+        });
+    }
+});
+
 function provideFeedback() {
     const rowStart = getRowStart();
-    guess.forEach((letter, index) => {
-        if (letter === word[index]) {
-            guessbox[rowStart + index].style.backgroundColor = 'green';
-        } else if (word.includes(letter)) {
-            guessbox[rowStart + index].style.backgroundColor = 'yellow';
-        } else {
-            guessbox[rowStart + index].style.backgroundColor = 'gray';
+    const results = [0,0,0,0,0];
+
+    // first check for greens
+    for (let i = 0; i < 5; i++) {
+        if (guess[i] === word[i]) {
+            results[i] = 2;
         }
-    });
+    }
+
+    // count letters for yellows
+    const answerCount = {};
+    for (let i = 0; i < 5; i++) {
+        if (results[i] !== 2) {
+            answerCount[word[i]] = (answerCount[word[i]] || 0) + 1;
+        }
+    }
+
+    // check for yellows
+    for (let i = 0; i < 5; i++) {
+        if (results[i] === 0 && answerCount[guess[i]] > 0) {
+            results[i] = 1;
+            answerCount[guess[i]]--;
+        }
+    }
+ // answer = bread, guess = bleak, results = [2, 0, 2, 2, 0]
+ // answer = bread, guess = drain, results = [0,2,0,0,0]
+ 
+
+//  check for yellows
+// answer = bread, guess = breed, results = [2, 2, 2, 0, 2]
+// answer = hammy, guess = madam, results = [0, 2, 0, 0, 0]
+
+    // update colors
+    for (let i = 0; i < 5; i++) {
+        if (results[i] === 2) {
+            guessbox[rowStart + i].style.backgroundColor = 'green';
+        } else if (results[i] === 1) {
+            guessbox[rowStart + i].style.backgroundColor = 'gold';
+        } else {
+            guessbox[rowStart + i].style.backgroundColor = 'gray';
+        }
+    }
 }
 
 function updateRow() {
@@ -77,3 +135,15 @@ function updateRow() {
         //Trying to get the row to change
     }
 }
+
+function countLetter(word, letter) {
+  return word.split('').filter(l => l === letter).length;
+}
+
+/* Need to add:
+- Need to add a timer.
+- Instructions about how to play the game are included in your app.
+- There is no remaining dead and/or commented out code or console logs outside of a commented out Code Graveyard section of your code.
+- backspace
+- */
+// 
