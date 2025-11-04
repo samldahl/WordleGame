@@ -1,6 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
-// const word = wordList[Math.floor(Math.random() * wordList.length)];
-const word = 'bread'
+const word = wordList[Math.floor(Math.random() * wordList.length)];
+// const word = 'bread'
 const keys = document.querySelectorAll('.keys');
 const wordLength = 5;
 const guessbox = document.querySelectorAll('.guessbox');
@@ -112,7 +112,7 @@ function provideFeedback() {
         }
     }
 
-    // check for yellows
+    // check for greys
     for (let i = 0; i < 5; i++) {
         if (results[i] === 0 && answerCount[guess[i]] > 0) {
             results[i] = 1;
