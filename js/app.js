@@ -6,13 +6,12 @@ const wordLength = 5;
 const guessbox = document.querySelectorAll('.guessbox');
 const enter = document.querySelector('.enter')
 const resetButton = document.getElementById('resetButton');
-const timerEl = document.getElementById('timer');
+const timerElement = document.getElementById('timer');
 
 /*---------------------------- Variables (state) ----------------------------*/
  let board = ['','','','','','','','','','','','','','','','','','','','','','','','','',];
  let guess = [];
  let guesses = [];
- let clicks = 0;
  let currentRow = 1;
  let timerInterval;
  let timeLeft = 60;
@@ -22,6 +21,7 @@ const timerEl = document.getElementById('timer');
   if (timeLeft <= 0) {
     clearInterval(timer);
     alert("Time's up! You Lose");
+    window.location.reload();
   }
 }, 1000);
 
@@ -67,7 +67,9 @@ function getRowStart() {
     if (guess.length === wordLength) { // 5
         if (guess.join('') === word) { // combos the array to word
             console.log('Correct guess!');
+            clearInterval(timer);
             showConfetti(); 
+            let win = True;
         } else {
             console.log('Incorrect guess!');
         }
