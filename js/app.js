@@ -12,9 +12,18 @@ const timerEl = document.getElementById('timer');
  let board = ['','','','','','','','','','','','','','','','','','','','','','','','','',];
  let guess = [];
  let guesses = [];
- let timer = 60;
  let clicks = 0;
  let currentRow = 1;
+ let timerInterval;
+ let timeLeft = 60;
+ let timer = setInterval(function() {
+  timeLeft--;
+  document.getElementById('timer').textContent = `${timeLeft} seconds left`;
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    alert("Time's up! You Lose");
+  }
+}, 1000);
 
 
  /*----------------------------- Event Listeners -----------------------------*/
@@ -136,9 +145,6 @@ function updateRow() {
     }
 }
 
-function countLetter(word, letter) {
-  return word.split('').filter(l => l === letter).length;
-}
 
 /* Need to add:
 - Need to add a timer.

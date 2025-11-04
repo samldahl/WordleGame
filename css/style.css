@@ -128,3 +128,10 @@
   border: none;
   background: #ffffff;
 }
+
+#timer {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 10px;
+
+}
