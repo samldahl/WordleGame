@@ -48,6 +48,7 @@
         <div class="guessbox" id="box24"></div>
         <div class="guessbox" id="box25"></div>
     </div>
+          <button id="instructionsbutton" >How to Play</button>
             <div id="timer">60</div>
 
 </div>
@@ -93,5 +94,18 @@
   <img src="imgs/confetti.gif" id="confetti">
   <div id="message">You Win!</div>
   <button id="resetButton">Play Again</button>
+</div>
+<div id="instructions" style="display:none;">
+<h2>Sam's Wordle</h2>
+  <p>Your goal is to guess the 5 letter word in 5 guesses under 60 seconds.</p>
+  <ul>
+    <li>You have 5 tries.</li>
+    <li>Click the keyboard buttons to enter your guess.</li>
+    <li>Green = correct letter and position.</li>
+    <li>Yellow = correct letter, wrong position.</li>
+    <li>Gray = letter not in the word.</li>
+    <li>Timer: You must guess before time runs out!</li>
+  </ul>
+    <button id="closeInstructions">Close</button>
 </div>
 </body>

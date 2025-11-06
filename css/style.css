@@ -46,6 +46,7 @@
     flex-direction: column;
     min-height: 100vh;
     justify-content: center;
+    margin-top: -200px;
 
 }
 
@@ -138,4 +139,24 @@
     font-size: 20px;
     padding-bottom: 10px;
 
+}
+
+#instructions {
+display: none;
+position: fixed;
+top: 0; left: 0;
+width: 100vw; height: 100vh;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+background-color: rgb(233, 233, 233,.9); /* semi-transparent overlay */
+z-index: 1000;
+}
+
+#instructionsbutton {
+    margin-top: 20px;
+    color: black;
+    background-color: aqua;
+    border-color: white;
+    box-shadow: none;
 }

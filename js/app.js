@@ -7,6 +7,11 @@ const guessbox = document.querySelectorAll('.guessbox');
 const enter = document.querySelector('.enter')
 const resetButton = document.getElementById('resetButton');
 const timerElement = document.getElementById('timer');
+const instructions = document.getElementById('instructions');
+const instructionsbutton = document.getElementById('instructionsbutton');
+const closeInstructions = document.getElementById('closeInstructions');
+
+
 
 /*---------------------------- Variables (state) ----------------------------*/
  let board = ['','','','','','','','','','','','','','','','','','','','','','','','','',];
@@ -14,13 +19,13 @@ const timerElement = document.getElementById('timer');
  let guesses = [];
  let currentRow = 1;
  let timerInterval;
- let timeLeft = 60;
+ let timeLeft = 600;
  let timer = setInterval(function() {
   timeLeft--;
   document.getElementById('timer').textContent = `${timeLeft} seconds left`;
   if (timeLeft <= 0) {
     clearInterval(timer);
-    alert("Time's up! You Lose");
+    confirm("Time's up! You Lose");
     window.location.reload();
   }
 }, 1000);
@@ -69,7 +74,6 @@ function getRowStart() {
             console.log('Correct guess!');
             clearInterval(timer);
             showConfetti(); 
-            let win = True;
         } else {
             console.log('Incorrect guess!');
         }
@@ -91,6 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload();
         });
     }
+});
+
+instructionsbutton.addEventListener('click', function() {
+  instructions.style.display = 'flex';
+});
+
+closeInstructions.addEventListener('click', function() {
+  instructions.style.display = 'none';
 });
 
 function provideFeedback() {
