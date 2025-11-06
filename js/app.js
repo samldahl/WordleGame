@@ -19,7 +19,7 @@ const closeInstructions = document.getElementById('closeInstructions');
  let guesses = [];
  let currentRow = 1;
  let timerInterval;
- let timeLeft = 600;
+ let timeLeft = 60;
  let timer = setInterval(function() {
   timeLeft--;
   document.getElementById('timer').textContent = `${timeLeft} seconds left`;
@@ -37,9 +37,8 @@ const closeInstructions = document.getElementById('closeInstructions');
     const letter = key.textContent;
     const rowStart = getRowStart();
     
-     if (guess.length <= wordLength) {
+     if (guess.length < wordLength) {
        guess.push(key.textContent);
-       console.log(guess);
        updateGuessbox();
       }
     })
@@ -48,9 +47,6 @@ const closeInstructions = document.getElementById('closeInstructions');
   enter.addEventListener('click', () => {
     provideFeedback();
     handleGuessSubmission();
-    console.log(`feedback`);
-    console.log(word);
-
   })
 
   /*-------------------------------- Functions --------------------------------*/
@@ -58,7 +54,6 @@ const closeInstructions = document.getElementById('closeInstructions');
   const rowStart = getRowStart();
   guess.forEach((letter, index) => {
     guessbox[rowStart + index].textContent = letter;
-    console.log('letter added to guess');
   });
 }
 
@@ -71,18 +66,21 @@ function getRowStart() {
   function handleGuessSubmission() {
     if (guess.length === wordLength) { // 5
         if (guess.join('') === word) { // combos the array to word
-            console.log('Correct guess!');
             clearInterval(timer);
             showConfetti(); 
-        } else {
-            console.log('Incorrect guess!');
         }
         // Move to the next row
         guesses.push(guess);
         guess = [];
         currentRow++; 
+
+        if (currentRow > 5) {
+        clearInterval(timer);
+        timerElement.textContent = "Out of guesses! You Lose";
+        setTimeout(() => window.location.reload(), 10000);
     }
 }
+  }
 
 function showConfetti() {
     const confetti = document.getElementById('confetti-container');
@@ -131,15 +129,7 @@ function provideFeedback() {
             answerCount[guess[i]]--;
         }
     }
- // answer = bread, guess = bleak, results = [2, 0, 2, 2, 0]
- // answer = bread, guess = drain, results = [0,2,0,0,0]
- 
 
-//  check for yellows
-// answer = bread, guess = breed, results = [2, 2, 2, 0, 2]
-// answer = hammy, guess = madam, results = [0, 2, 0, 0, 0]
-
-    // update colors
     for (let i = 0; i < 5; i++) {
         if (results[i] === 2) {
             guessbox[rowStart + i].style.backgroundColor = 'green';
@@ -154,16 +144,8 @@ function provideFeedback() {
 function updateRow() {
     for (let i = 0; i < wordLength; i++) {
         const boxIndex = (currentRow - 1) * wordLength + i;
-        guessbox[boxIndex].textContent = guess[i] //
-        //Trying to get the row to change
+        guessbox[boxIndex].textContent = guess[i]
     }
 }
 
 
-/* Need to add:
-- Need to add a timer.
-- Instructions about how to play the game are included in your app.
-- There is no remaining dead and/or commented out code or console logs outside of a commented out Code Graveyard section of your code.
-- backspace
-- */
-// 
