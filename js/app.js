@@ -147,5 +147,3 @@ function updateRow() {
         guessbox[boxIndex].textContent = guess[i]
     }
 }
-
-
