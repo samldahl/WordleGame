@@ -1,11 +1,12 @@
 # Sam's Wordle
+![Sam's Wordle Logo](/imgs/60secondWordle.png "Sams Wordle Logo")
 
 A browser-based Wordle game built with HTML, CSS, and JavaScript.
 
 ## How to Play
 
-- Guess the 5-letter word in 5 tries.
-- Click the on-screen keyboard to enter your guess.
+- Guess the 5 letter word in 5 tries.
+- Click the on screen keyboard to enter your guess.
 - Press "Enter" to submit your guess.
 - Green = correct letter and position.
 - Gold = correct letter, wrong position.
@@ -15,7 +16,7 @@ A browser-based Wordle game built with HTML, CSS, and JavaScript.
 
 ## Features
 
-- On-screen keyboard
+- On screen keyboard
 - Timer
 - Confetti animation on win
 - Play Again button
