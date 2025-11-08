@@ -5,8 +5,8 @@ A browser based Wordle game built with HTML, CSS, and JavaScript.
 
 ## How to Play
 
-- Guess the 5-letter word in 5 tries.
-- Click the on-screen keyboard to enter your guess.
+- Guess the 5 letter word in 5 tries.
+- Click the on screen keyboard to enter your guess.
 - Press "Enter" to submit your guess.
 - Green = correct letter and position.
 - Gold = correct letter, wrong position.
@@ -16,6 +16,7 @@ A browser based Wordle game built with HTML, CSS, and JavaScript.
 
 ## Features
 
+- On screen keyboard
 - On screen keyboard
 - Timer
 - Confetti animation on win
@@ -34,4 +35,4 @@ A browser based Wordle game built with HTML, CSS, and JavaScript.
 - `css/style.css` Styles
 - `js/app.js` Game logic
 - `js/words.js` Word list
-- `imgs/` Images (confetti, etc.)
+- `imgs/` Images
